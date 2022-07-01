@@ -1,4 +1,5 @@
 # Training Classifiers
+
 This project is part of a larger project for a language based game, 
 which requires classification of texts. The models will eventually
 be trained on data from the game, but until then a news dataset from
