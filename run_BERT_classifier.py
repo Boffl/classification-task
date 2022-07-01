@@ -158,7 +158,7 @@ class BertClassifier(nn.Module):
 # load the fine-tuned model
 time_load_model_1 = time.perf_counter()
 news_model = BertClassifier(num_labels=num_labels_news)
-news_model.load_state_dict(torch.load("BERT_classifier_news_data.pt", map_location=device))
+news_model.load_state_dict(torch.load("models/BERT_classifier_news_data.pt", map_location=device))
 time_load_model_2 = time.perf_counter()
 # note to myself: map_location=device is important if using cpu, the default is cuda
 # the device varialbe is defined above in Set up GPU for training.
@@ -217,7 +217,7 @@ def evaluate_example():
     time_1 = time.perf_counter()
     # Get the data
     time_load_data_1 = time.perf_counter()
-    label, text = get_input_data("bbc-text_test.csv", 445)
+    label, text = get_input_data("data/bbc-text_test.csv", 445)
     time_load_data_2 = time.perf_counter()
 
     time_predict_1 = time.perf_counter()
