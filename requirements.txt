@@ -3,3 +3,6 @@ numpy==1.23.0
 pandas==1.4.3
 torch==1.11.0
 sklearn
+jupyter
+protobuf==3.12.2
+onnxruntime
