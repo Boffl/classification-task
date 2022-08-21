@@ -10,6 +10,7 @@ import numpy as np
 from transformers import BertTokenizer
 import onnxruntime as ort
 from sklearn.preprocessing import LabelEncoder
+import os
 importtime_1 = time.perf_counter()
 
 # only use this while testing on existing dataset...
@@ -106,7 +107,8 @@ if __name__=="__main__":
     label, text = get_input_data("data/bbc-text_test.csv", 445)
     print("start inference...")
     time_0 = time.perf_counter()
-    logits = inference("models/news_model.onnx", text)
+    model = os.path.abspath(r"C:\Users\nik_b\Documents\UZH\Party_Game\models\news_model.onnx")
+    logits = inference(model, text)
     time_1 = time.perf_counter()
 
     prediction = get_prediction(logits, le_news)

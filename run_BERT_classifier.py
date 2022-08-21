@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # Author: Nikolaj Bauer
-
+import time
+importtime_0 = time.perf_counter()
 import numpy as np
 import pandas as pd
 import torch
@@ -13,7 +14,11 @@ import torch.nn as nn
 from transformers import BertModel, BertConfig
 import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader, SequentialSampler
-import time
+
+importtime_1 = time.perf_counter()
+
+
+
 
 time_0 = time.perf_counter()  # measure execution time
 
@@ -155,13 +160,7 @@ class BertClassifier(nn.Module):
 
         return logits
 
-# load the fine-tuned model
-time_load_model_1 = time.perf_counter()
-news_model = BertClassifier(num_labels=num_labels_news)
-news_model.load_state_dict(torch.load("models/BERT_classifier_news_data.pt", map_location=device))
-time_load_model_2 = time.perf_counter()
-# note to myself: map_location=device is important if using cpu, the default is cuda
-# the device varialbe is defined above in Set up GPU for training.
+
 
 
 def make_prediction(model:BertClassifier, le:LabelEncoder, texts:list[str]):
@@ -205,15 +204,20 @@ def make_prediction(model:BertClassifier, le:LabelEncoder, texts:list[str]):
     return le.inverse_transform(preds)
 
 
-def evaluate_on_test_set():
-    data_test = pd.read_csv("bbc-text_test.csv")
-    probs = make_prediction(news_model, le_news, data_test.text)
-    print(probs)
-
-
 
 def evaluate_example():
+    # load the fine-tuned model
+    time_load_model_1 = time.perf_counter()
+    news_model = BertClassifier(num_labels=num_labels_news)
+    news_model.load_state_dict(torch.load("models/BERT_classifier_news_data.pt", map_location=device))
+    time_load_model_2 = time.perf_counter()
+    data_test = pd.read_csv("bbc-text_test.csv")
+    probs = make_prediction(news_model, le_news, data_test.text)
+    # note to myself: map_location=device is important if using cpu, the default is cuda
+    # the device varialbe is defined above in Set up GPU for training.
+
     """Evaluate on one example and measure the time"""
+    print(f"importing time: {importtime_1 - importtime_0}")
     time_1 = time.perf_counter()
     # Get the data
     time_load_data_1 = time.perf_counter()
@@ -238,6 +242,7 @@ def evaluate_example():
 
 
 if __name__ == "__main__":
+
     evaluate_example()
     # evaluate_on_test_set()
 
