@@ -1,0 +1,8 @@
+drink water
+drink alcohol
+eat
+dance
+leave
+vomit
+talk
+pee
