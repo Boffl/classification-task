@@ -7,7 +7,7 @@ the bbc[^1] is used. It can be found [here](http://mlg.ucd.ie/datasets/bbc.html)
 ----
 [^1]: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
 
-##Bert Classifier
+## Bert Classifier
 A fine-tuned BERT model, with a one layer classifier 
 on top. The initial BERT is the bert-base-uncased.
 ###Scripts
